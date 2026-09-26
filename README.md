@@ -1,8 +1,8 @@
 # Benefits FAQ Agent
 
-An AI-powered agent that answers employee benefits questions using Retrieval-Augmented Generation (RAG) over a structured benefits knowledge base.
+A planned agent that answers employee benefits questions using Retrieval-Augmented Generation (RAG) over a structured benefits knowledge base.
 
-Built with Azure AI Search, Azure OpenAI, and Microsoft Copilot Studio. Designed as a portfolio project demonstrating HR domain expertise combined with enterprise AI architecture.
+Planned stack: Azure AI Search, Azure OpenAI, and Microsoft Copilot Studio. This is a portfolio project that connects benefits operations knowledge with AI product design. It is not deployed at an employer.
 
 [![Status](https://img.shields.io/badge/status-in%20progress-yellow)](https://github.com/Automater89/benefits-faq-agent)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
@@ -11,31 +11,31 @@ Built with Azure AI Search, Azure OpenAI, and Microsoft Copilot Studio. Designed
 
 ## Problem Statement
 
-Employees at mid-to-large companies ask the same benefits questions repeatedly: deductibles, HSA limits, open enrollment windows, dependent coverage rules, 401k contribution deadlines. HR teams spend significant time answering questions that could be handled instantly by a well-governed AI agent.
+Employees ask the same benefits questions every year: deductibles, HSA limits, open enrollment windows, dependent coverage rules, 401(k) contribution deadlines. HR teams answer many of them by hand.
 
-This project builds a conversational agent that answers those questions instantly, accurately, and within guardrails — reducing HR workload while improving the employee experience.
+This project designs an agent that answers those questions from approved plan documents, cites its source, and hands anything it can't answer to a person.
 
 ---
 
 ## Goals
 
-- Demonstrate how domain expertise in benefits administration can be converted into an AI-powered knowledge tool.
+- Show how benefits operations knowledge can shape an AI knowledge tool.
 - Build a practical RAG pipeline using Azure AI services.
-- Show a complete agent experience from document ingestion to conversational response.
-- Create a public portfolio artifact that connects HR operations knowledge to AI product thinking.
+- Show the full path from document ingestion to a conversational answer.
+- Create a public portfolio example that connects HR operations with AI product thinking.
 
 ---
 
 ## Planned Solution
 
-The agent follows a RAG (Retrieval-Augmented Generation) pattern:
+The agent follows a RAG pattern:
 
 1. Benefits documents (handbooks, FAQs, plan summaries) are ingested and chunked.
 2. Chunks are indexed in Azure AI Search with vector embeddings.
-3. Employee asks a question via Copilot Studio or a web interface.
+3. An employee asks a question through Copilot Studio or a web interface.
 4. The question is embedded and matched against the index.
-5. Retrieved context is passed to Azure OpenAI with a system prompt.
-6. The agent returns a grounded, human-readable answer with a source reference.
+5. Retrieved context goes to Azure OpenAI with a system prompt.
+6. The agent returns an answer grounded in the documents, with a source reference.
 
 ---
 
@@ -57,31 +57,31 @@ The agent follows a RAG (Retrieval-Augmented Generation) pattern:
 [Chunked Benefits Documents]
         |
         v
-[Azure OpenAI GPT-4o - Answer Generation]
+[Azure OpenAI - Answer Generation]
         |
         v
 [Grounded Response + Source Citation]
         |
         v
-[Employee / HR System]
+[Employee, or escalation to HR]
 ```
 
-For full architecture detail, see [docs/architecture.md](docs/architecture.md).
+For more detail, see [docs/architecture.md](docs/architecture.md).
 
 ---
 
-## Tech Stack
+## Planned Tech Stack
 
 | Layer | Tooling |
 |---|---|
 | Cloud platform | Azure |
 | Document storage | Azure Blob Storage |
-| Vector search + retrieval | Azure AI Search (with semantic ranking) |
+| Vector search and retrieval | Azure AI Search (with semantic ranking) |
 | Embedding model | Azure OpenAI (text-embedding-3-small) |
-| LLM / answer generation | Azure OpenAI (GPT-4o) |
+| Answer generation | Azure OpenAI (GPT-4o) |
 | Agent experience | Microsoft Copilot Studio |
-| Workflow automation | Power Automate |
-| Runtime / scripting | Python 3.10+, VS Code |
+| Escalation workflow | Power Automate |
+| Runtime and scripting | Python 3.10+, VS Code |
 | Version control | GitHub |
 
 ---
@@ -123,7 +123,7 @@ benefits-faq-agent/
 
 ### Milestone 1: Environment Setup
 - Create Azure resources (Blob Storage, AI Search, OpenAI)
-- Configure Python environment
+- Configure the Python environment
 - Store secrets in `.env` (never committed)
 - Confirm API connectivity to all services
 
@@ -134,55 +134,49 @@ benefits-faq-agent/
 
 ### Milestone 3: Indexing Pipeline
 - Generate vector embeddings for each chunk
-- Build Azure AI Search index with semantic configuration
-- Validate search returns relevant results for test queries
+- Build an Azure AI Search index with semantic configuration
+- Check that search returns relevant results for test queries
 
 ### Milestone 4: Answer Generation
-- Construct grounded system prompt with retrieved context
-- Call Azure OpenAI GPT-4o for answer generation
-- Return answer with source document citation
+- Build a grounded system prompt with retrieved context
+- Call Azure OpenAI for answer generation
+- Return each answer with a source citation
 
 ### Milestone 5: Agent Integration
-- Connect retrieval + generation pipeline to Copilot Studio
-- Build a conversational topic flow for common benefits Q&A
-- Add escalation path: unanswered questions route to HR inbox via Power Automate
+- Connect the retrieval and generation pipeline to Copilot Studio
+- Build a conversational topic flow for common benefits questions
+- Add an escalation path: unanswered questions route to an HR inbox through Power Automate
 
 ### Milestone 6: Guardrails and Safety
-- Add out-of-scope detection (agent declines non-benefits questions)
-- Add disclaimer for medical/legal advice boundaries
-- Log unanswered questions for handbook gap analysis
+- Decline questions outside benefits
+- Add a disclaimer for medical and legal advice boundaries
+- Log unanswered questions to find gaps in the handbook
 
 ### Milestone 7: Portfolio Polish
-- Add sample input/output pairs
-- Record Loom walkthrough demo
-- Publish architecture diagram
-- Add LinkedIn project summary
-- Link to Agent Showcase: https://automater89.github.io/Agent-Showcase/
+- Add sample input and output pairs
+- Record a short walkthrough demo
+- Publish the architecture diagram
+- Add a LinkedIn project summary
 
 ---
 
-## Use Cases
+## Sample Questions
 
 - "What is my medical plan deductible this year?"
 - "When does open enrollment close?"
 - "Can I add a domestic partner to my health plan?"
-- "What is the 401k employer match?"
+- "What is the 401(k) employer match?"
 - "How do I file an HSA reimbursement?"
-- "What does the wellbeing fund cover?"
+
+All sample documents in this repository are synthetic. No employer plan documents or employee data are used.
 
 ---
 
-## Domain Expertise Behind This Project
+## Why I Built This
 
-This project is grounded in real HR and benefits operations experience:
+I worked in benefits operations at Wayne County, Rocket, and WACKER. That work included enrollment and eligibility, EDI 834 file processing and reject resolution, HSA and FSA processes, open-enrollment sessions, and employee education. I also contributed to a cross-functional Benefits Customer Service Tracker on SharePoint with Power Automate routing and notifications, supporting service intake and workload visibility.
 
-- 4+ years administering benefits across manufacturing, financial services, and public sector environments
-- Led open enrollment sessions for 50–300 employees
-- Designed and built a Benefits Customer Service Tracker (SharePoint + Power Automate)
-- Managed medical, HSA, and FSA platform integrations
-- Reduced benefits processing time by 60% through automation
-
-The agent's knowledge structure, question taxonomy, and guardrails reflect what real employees actually ask — not synthetic demos.
+The question list and guardrails in this project come from the kinds of questions employees asked in that work.
 
 ---
 
@@ -203,23 +197,16 @@ cp .env.example .env
 
 ## Success Criteria
 
-- Agent correctly answers 10+ representative benefits questions using only document context
-- Unanswerable questions are gracefully declined and escalated
-- Repository is understandable to non-technical HR stakeholders and technical recruiters
-- Demo clearly shows the HR domain problem being solved — not just the tech
-
----
-
-## Related Projects
-
-- [azure-doc-agent](https://github.com/Automater89/azure-doc-agent) — Document extraction and agent workflow pipeline
-- [Agent Showcase](https://automater89.github.io/Agent-Showcase/) — Live portfolio of AI and automation projects
+- The agent answers 10+ representative benefits questions using only document context
+- Questions it can't answer are declined and escalated
+- The repository makes sense to HR stakeholders and technical recruiters
+- The demo shows the benefits problem being solved, not just the technology
 
 ---
 
 ## Status
 
-Current phase: scaffold and planning.
+Current phase: scaffold and planning. Nothing in this repository has been deployed.
 
 ## License
 
